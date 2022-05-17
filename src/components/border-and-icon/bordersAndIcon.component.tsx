@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { ReactComponent as PauseIconDesktop } from '../../assets/pattern-divider-desktop.svg';
 import { BorderAndIconContainer } from './borderAndIcon.styles';
 
@@ -8,12 +8,18 @@ const BorderAndIcon: FC = () => {
   const [match, setMatch] = useState<boolean>();
   const mediaQueryList = window.matchMedia('(min-width: 90em)');
 
-  const doChange = (): void => setMatch(mediaQueryList.matches);
+  const doChange = useCallback(
+    () => setMatch(mediaQueryList.matches),
+    [mediaQueryList.matches]
+  );
+
   useEffect(() => {
+    setMatch(mediaQueryList.matches);
     mediaQueryList.addEventListener('change', doChange);
 
     return () => mediaQueryList.removeEventListener('change', doChange);
-  });
+  }, [mediaQueryList, doChange]);
+
   return (
     <BorderAndIconContainer>
       {match ? <PauseIconDesktop /> : <PauseIconMobile />}
