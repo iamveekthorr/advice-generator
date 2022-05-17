@@ -5,15 +5,14 @@ const useAdvice = (): { adviceSlip: string; adviceId: number } => {
   const [adviceSlip, setAdviceSlip] = useState<string>('');
   const [adviceId, setAdviceId] = useState<number>(0);
 
-  useEffect(() => {
-    const resolvePromise = async (): Promise<void> => {
-      const { advice, id } = await getAdviceController();
-      setAdviceSlip(advice);
-      setAdviceId(id);
-    };
+  const resolvePromise = (): void => {
+    getAdviceController().then((slip) => {
+      setAdviceSlip(slip.advice);
+      setAdviceId(slip.id);
+    });
+  };
 
-    resolvePromise();
-  });
+  useEffect(resolvePromise, []);
 
   return { adviceSlip, adviceId };
 };
