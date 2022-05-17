@@ -6,8 +6,7 @@ const CardBG = styled.div`
   position: relative;
   height: auto;
   border-radius: 1rem;
-  padding: 3rem;
-  width: 30rem;
+  padding: 3rem 2rem;
 
   @media only screen and (min-width: 90em) {
     padding: 5rem;
