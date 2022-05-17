@@ -7,4 +7,5 @@ export const HeadingText = styled.p`
   font-size: 1.6rem;
   text-align: center;
   font-weight: 600;
+  letter-spacing: 0.3rem;
 `;
